@@ -1,0 +1,171 @@
+[
+    {
+        "name": "symfony/options-resolver",
+        "version": "v2.8.11",
+        "version_normalized": "2.8.11.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/options-resolver.git",
+            "reference": "b6f982782a0624d37b5416c2c96fb99ce5ab74d5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/options-resolver/zipball/b6f982782a0624d37b5416c2c96fb99ce5ab74d5",
+            "reference": "b6f982782a0624d37b5416c2c96fb99ce5ab74d5",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "time": "2016-06-29 05:29:29",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\OptionsResolver\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony OptionsResolver Component",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "config",
+            "configuration",
+            "options"
+        ]
+    },
+    {
+        "name": "yohang/calendr",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yohang/CalendR.git",
+            "reference": "33fd08498954dd98fa7cf9a7fe8df05199bde889"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yohang/CalendR/zipball/33fd08498954dd98fa7cf9a7fe8df05199bde889",
+            "reference": "33fd08498954dd98fa7cf9a7fe8df05199bde889",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "symfony/options-resolver": "^2.3"
+        },
+        "require-dev": {
+            "doctrine/cache": "^1.1",
+            "doctrine/common": "^2.4",
+            "doctrine/orm": "^2.4",
+            "google/google-api-php-client": "^0.6.2",
+            "phpunit/phpunit": "^4.0",
+            "silex/silex": "^1.1",
+            "twig/twig": "^1.13"
+        },
+        "time": "2015-12-28 11:14:45",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "CalendR": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Yohan GIARELLI",
+                "email": "yohan@giarel.li",
+                "homepage": "http://yohan.giarel.li"
+            }
+        ],
+        "description": "Object Oriented calendar management",
+        "homepage": "https://github.com/yohang/CalendR",
+        "keywords": [
+            "calendar",
+            "date",
+            "events"
+        ]
+    },
+    {
+        "name": "raveren/kint",
+        "version": "1.0.10",
+        "version_normalized": "1.0.10.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/raveren/kint.git",
+            "reference": "c8423b9928bd35bf6ad14c688ab9c6d17d97d0eb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/raveren/kint/zipball/c8423b9928bd35bf6ad14c688ab9c6d17d97d0eb",
+            "reference": "c8423b9928bd35bf6ad14c688ab9c6d17d97d0eb",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.1.0"
+        },
+        "time": "2015-09-16 14:09:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "Kint.class.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Rokas Šleinius",
+                "homepage": "https://github.com/raveren"
+            },
+            {
+                "name": "Contributors",
+                "homepage": "https://github.com/raveren/kint/contributors"
+            }
+        ],
+        "description": "Kint - debugging helper for PHP developers",
+        "homepage": "https://github.com/raveren/kint",
+        "keywords": [
+            "debug",
+            "kint",
+            "php"
+        ]
+    }
+]
