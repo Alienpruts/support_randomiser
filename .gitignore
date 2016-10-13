@@ -1,8 +1,9 @@
 # IntelliJ project files
 .idea
-*.iml
-out
-gen
 
 # Exclude vendor, let Composer take care of those
 vendor/*
+
+# Exclude log files and cache
+/logs/
+/cache/
