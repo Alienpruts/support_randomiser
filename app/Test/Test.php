@@ -1,6 +1,6 @@
 <?php
 
-namespace Alienpruts\SupportRandomiser;
+namespace Alienpruts\SupportRandomiser\Test;
 
 
 class Test

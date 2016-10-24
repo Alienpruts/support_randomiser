@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Alienpruts\\SupportRandomiser\\": "src/"
+            "Alienpruts\\SupportRandomiser\\": "app/"
         }
     }
 }

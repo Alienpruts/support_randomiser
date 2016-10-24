@@ -7,3 +7,6 @@ vendor/*
 # Exclude log files and cache
 /logs/
 /cache/
+
+# Exclude app specific configuration
+/app/Configurator/Configurator.php
