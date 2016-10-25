@@ -10,7 +10,8 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 $app->get('/hello/{name}', function (Request $req, Response $res, $args) {
-    $this->logger->addNotice('Allright, Monolog Logger seems to be working. Well done!' . $args['name']);
+    $this->debuglogger->addDebug('Allright, Monolog Logger seems to be working. Well done!' . $args['name']);
+    $this->accesslogger->addNotice('Request: ' . $req->getMethod() . ' | ' . $req->getUri() . ' | Status : ' . $res->getStatusCode());
     d('Kint seems to be working, this is the Request object');
     d($req);
     return $this->view->render($res, 'index.twig', [
