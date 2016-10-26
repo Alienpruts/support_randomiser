@@ -14,6 +14,8 @@ $app->get('/hello/{name}', function (Request $req, Response $res, $args) {
     $this->accesslogger->addNotice('Request: ' . $req->getMethod() . ' | ' . $req->getUri() . ' | Status : ' . $res->getStatusCode());
     d('Kint seems to be working, this is the Request object');
     d($req);
+    $result = $this->eloquent->table('test')->find(1);
+    d($result->test);
     return $this->view->render($res, 'index.twig', [
       'name' => $args['name'],
     ]);
