@@ -8,6 +8,7 @@
 
 
 use Alienpruts\SupportRandomiser\Configurator\Configurator;
+use Alienpruts\SupportRandomiser\Controllers\HomeController;
 use Alienpruts\SupportRandomiser\Middleware\AccessLogMiddleware;
 use Illuminate\Database\Capsule\Manager;
 
@@ -29,6 +30,10 @@ $container['eloquent'] = function ($container) {
     $capsule->bootEloquent();
 
     return $capsule;
+};
+
+$container['HomeController'] = function ($container) {
+    return new HomeController($container);
 };
 
 $app->add(new AccessLogMiddleware($container));
