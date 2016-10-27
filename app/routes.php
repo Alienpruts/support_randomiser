@@ -7,3 +7,5 @@
  */
 
 $app->get('/', 'HomeController:index')->setName('home');
+
+$app->get('/auth/signin', 'AuthController:getSignin')->setName('auth.signin');

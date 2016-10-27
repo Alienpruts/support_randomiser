@@ -8,16 +8,17 @@
 
 namespace Alienpruts\SupportRandomiser\Controllers;
 
-
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Views\Twig;
 
+/**
+ * @property Twig view
+ */
 class HomeController extends BaseController
 {
     public function index(Request $req, Response $res)
     {
-        //TODO : render homepage view
-
-        return $res->getBody()->write('HomeController:index is working');
+        return $this->view->render($res, 'home.twig');
     }
 }
