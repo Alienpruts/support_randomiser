@@ -8,6 +8,7 @@
 
 
 use Alienpruts\SupportRandomiser\Configurator\Configurator;
+use Alienpruts\SupportRandomiser\Middleware\AccessLogMiddleware;
 use Illuminate\Database\Capsule\Manager;
 
 session_start();
@@ -29,5 +30,7 @@ $container['eloquent'] = function ($container) {
 
     return $capsule;
 };
+
+$app->add(new AccessLogMiddleware($container));
 
 require_once __DIR__ . '/../app/routes.php';
