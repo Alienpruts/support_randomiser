@@ -23,5 +23,10 @@ class AuthController extends BaseController
         return $this->view->render($res, 'templates/auth/signin.twig');
     }
 
+    public function postSignin (Request $req, Response $res)
+    {
+        //TODO : implement login logic using User model.
+        return $res->getBody()->write('testing post request');
+    }
 
 }
