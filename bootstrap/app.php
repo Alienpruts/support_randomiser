@@ -7,6 +7,7 @@
  */
 
 
+use Alienpruts\SupportRandomiser\Auth\Auth;
 use Alienpruts\SupportRandomiser\Configurator\Configurator;
 use Alienpruts\SupportRandomiser\Controllers\Auth\AuthController;
 use Alienpruts\SupportRandomiser\Controllers\HomeController;
@@ -24,13 +25,17 @@ $app = new Slim\App($config->getConfiguration());
 
 $container = $app->getContainer();
 
-$container['eloquent'] = function ($container) {
-    $capsule = new Manager();
-    $capsule->addConnection($container['db']);
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
+$capsule = new Manager();
+$capsule->addConnection($container['settings']['db']);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
+$container['db'] = function ($container) use ($capsule) {
     return $capsule;
+};
+
+$container['auth'] = function ($container) {
+    return new Auth();
 };
 
 $container['HomeController'] = function ($container) {
