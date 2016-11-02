@@ -12,6 +12,7 @@ use Alienpruts\SupportRandomiser\Configurator\Configurator;
 use Alienpruts\SupportRandomiser\Controllers\Auth\AuthController;
 use Alienpruts\SupportRandomiser\Controllers\HomeController;
 use Alienpruts\SupportRandomiser\Middleware\AccessLogMiddleware;
+use Alienpruts\SupportRandomiser\Validation\Validator;
 use Illuminate\Database\Capsule\Manager;
 
 session_start();
@@ -44,6 +45,10 @@ $container['HomeController'] = function ($container) {
 
 $container['AuthController'] = function ($container) {
     return new AuthController($container);
+};
+
+$container['validator'] = function () {
+    return new Validator();
 };
 
 $app->add(new AccessLogMiddleware($container));
