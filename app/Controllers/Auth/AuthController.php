@@ -8,13 +8,17 @@
 
 namespace Alienpruts\SupportRandomiser\Controllers\Auth;
 
+use Alienpruts\SupportRandomiser\Auth\Auth;
 use Alienpruts\SupportRandomiser\Controllers\BaseController;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Router;
 use Slim\Views\Twig;
 
 /**
  * @property Twig view
+ * @property Auth auth
+ * @property Router router
  */
 class AuthController extends BaseController
 {
@@ -23,10 +27,21 @@ class AuthController extends BaseController
         return $this->view->render($res, 'templates/auth/signin.twig');
     }
 
-    public function postSignin (Request $req, Response $res)
+    public function postSignin(Request $req, Response $res)
     {
-        //TODO : implement login logic using User model.
-        return $res->getBody()->write('testing post request');
+
+        $authenticated = $this->auth->attempt(
+          $req->getParam('email'),
+          $req->getParam('password')
+        );
+
+        // If authentication retrieval failed, redirect to signin page.
+        if (!$authenticated) {
+            // TODO : set message of some sort?
+            return $res->withRedirect($this->router->pathFor('auth.signin'));
+        }
+
+        return $res->withRedirect($this->router->pathFor('home'));
     }
 
 }
