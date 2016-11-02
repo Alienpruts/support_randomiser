@@ -44,4 +44,12 @@ class AuthController extends BaseController
         return $res->withRedirect($this->router->pathFor('home'));
     }
 
+    public function getSignOut(Request $req, Response $res)
+    {
+        $this->auth->signout();
+
+        // TODO : set message to notify of logout.
+        return $res->withRedirect($this->router->pathFor('home'));
+    }
+
 }

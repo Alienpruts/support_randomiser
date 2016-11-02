@@ -10,3 +10,5 @@ $app->get('/', 'HomeController:index')->setName('home');
 
 $app->get('/auth/signin', 'AuthController:getSignin')->setName('auth.signin');
 $app->post('/auth/signin', 'AuthController:postSignin');
+
+$app->get('/auth/signout', 'AuthController:getsignout')->setName('auth.signout');

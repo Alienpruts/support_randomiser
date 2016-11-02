@@ -20,7 +20,7 @@ class Auth
         if (!$user) {
             return false;
         }
-        // TODO : password verfication via password_verify!
+        // TODO : password verification via password_verify!
         if ($user->paswoord == $password) {
             $_SESSION['uid'] = $user->id;
             return true;
@@ -42,5 +42,12 @@ class Auth
     public function check()
     {
         return isset($_SESSION['uid']);
+    }
+
+    public function signout()
+    {
+        if (isset($_SESSION['uid'])) {
+            unset($_SESSION['uid']);
+        }
     }
 }
