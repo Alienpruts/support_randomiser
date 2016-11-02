@@ -21,4 +21,21 @@ class User extends Model
       'score'
     ];
 
+    public function setPassword($password)
+    {
+        // set password on user
+        // TODO : save using hash !!
+        return $this->update([
+            'paswoord' => $password,
+          ]
+        );
+    }
+
+    public function setEmail($email)
+    {
+        return $this->update([
+          'email' => $email,
+        ]);
+    }
+
 }
