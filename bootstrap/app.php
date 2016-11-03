@@ -12,6 +12,7 @@ use Alienpruts\SupportRandomiser\Configurator\Configurator;
 use Alienpruts\SupportRandomiser\Controllers\Auth\AuthController;
 use Alienpruts\SupportRandomiser\Controllers\HomeController;
 use Alienpruts\SupportRandomiser\Middleware\AccessLogMiddleware;
+use Alienpruts\SupportRandomiser\Middleware\OldInputMiddleware;
 use Alienpruts\SupportRandomiser\Validation\Validator;
 use Illuminate\Database\Capsule\Manager;
 
@@ -52,5 +53,7 @@ $container['validator'] = function () {
 };
 
 $app->add(new AccessLogMiddleware($container));
+
+$app->add(new OldInputMiddleware($container));
 
 require_once __DIR__ . '/../app/routes.php';
