@@ -27,6 +27,9 @@ class Validator
             }
         }
 
+        // Set errors in session.
+        $_SESSION['errors'] = $this->errors;
+
         return $this;
     }
 

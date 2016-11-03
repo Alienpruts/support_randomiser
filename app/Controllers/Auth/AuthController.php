@@ -73,7 +73,7 @@ class AuthController extends BaseController
         // TODO : check if current password is correct (custom rule).
         $validation = $this->validator->validate($req, [
           'email' => v::noWhitespace()->notEmpty()->email(),
-          'password' => v::noWhitespace()->notEmpty()->min(8),
+          'password' => v::noWhitespace()->notEmpty()->length(8),
         ]);
 
         if ($validation->failed()) {
