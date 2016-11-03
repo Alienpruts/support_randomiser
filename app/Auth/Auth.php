@@ -20,8 +20,8 @@ class Auth
         if (!$user) {
             return false;
         }
-        // TODO : password verification via password_verify!
-        if ($user->paswoord == $password) {
+
+        if (password_verify($password, $user->paswoord)) {
             $_SESSION['uid'] = $user->id;
             return true;
         }

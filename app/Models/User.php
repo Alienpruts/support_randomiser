@@ -23,10 +23,8 @@ class User extends Model
 
     public function setPassword($password)
     {
-        // set password on user
-        // TODO : save using hash !!
         return $this->update([
-            'paswoord' => $password,
+            'paswoord' => password_hash($password, PASSWORD_DEFAULT),
           ]
         );
     }
