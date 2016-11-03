@@ -10,15 +10,18 @@ namespace Alienpruts\SupportRandomiser\Controllers\Auth;
 
 use Alienpruts\SupportRandomiser\Auth\Auth;
 use Alienpruts\SupportRandomiser\Controllers\BaseController;
+use Alienpruts\SupportRandomiser\Validation\Validator;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Router;
 use Slim\Views\Twig;
+use Respect\Validation\Validator as v;
 
 /**
  * @property Twig view
  * @property Auth auth
  * @property Router router
+ * @property Validator validator
  */
 class AuthController extends BaseController
 {
@@ -66,10 +69,21 @@ class AuthController extends BaseController
 
     public function postEdit(Request $req, Response $res)
     {
-        // TODO : validation rules for each field + check if current password is correct (custom rule).
+
+        // TODO : check if current password is correct (custom rule).
+        $validation = $this->validator->validate($req, [
+          'email' => v::noWhitespace()->notEmpty()->email(),
+          'password' => v::noWhitespace()->notEmpty()->min(8),
+        ]);
+
+        if ($validation->failed()) {
+            // TODO : flash messages
+            return $res->withRedirect($this->router->pathFor('auth.edit'));
+        }
 
         // TODO : check if updates failed or not.
-        $updated_password = $this->auth->user()->setPassword($req->getParam('password'));
+        $updated_password = $this->auth->user()
+          ->setPassword($req->getParam('password'));
         $updated_email = $this->auth->user()->setEmail($req->getParam('email'));
 
         // TODO Flash message to indicate succes or failure.
