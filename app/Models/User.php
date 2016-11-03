@@ -21,4 +21,19 @@ class User extends Model
       'score'
     ];
 
+    public function setPassword($password)
+    {
+        return $this->update([
+            'paswoord' => password_hash($password, PASSWORD_DEFAULT),
+          ]
+        );
+    }
+
+    public function setEmail($email)
+    {
+        return $this->update([
+          'email' => $email,
+        ]);
+    }
+
 }

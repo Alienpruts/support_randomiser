@@ -52,4 +52,29 @@ class AuthController extends BaseController
         return $res->withRedirect($this->router->pathFor('home'));
     }
 
+    public function getEdit(Request $req, Response $res)
+    {
+        // Get edit form for current user, if logged in
+        if (!($this->auth->check())) {
+            //return to home page, invalid route !!!
+            var_dump('not logged in!');
+            return $res->withRedirect($this->router->pathFor('home'));
+        }
+
+        return $this->view->render($res, 'templates/auth/edit.twig');
+    }
+
+    public function postEdit(Request $req, Response $res)
+    {
+        // TODO : validation rules for each field + check if current password is correct (custom rule).
+
+        // TODO : check if updates failed or not.
+        $updated_password = $this->auth->user()->setPassword($req->getParam('password'));
+        $updated_email = $this->auth->user()->setEmail($req->getParam('email'));
+
+        // TODO Flash message to indicate succes or failure.
+
+        return $res->withRedirect($this->router->pathFor('home'));
+    }
+
 }
