@@ -12,11 +12,13 @@ use Alienpruts\SupportRandomiser\Configurator\Configurator;
 use Alienpruts\SupportRandomiser\Controllers\Auth\AuthController;
 use Alienpruts\SupportRandomiser\Controllers\HomeController;
 use Alienpruts\SupportRandomiser\Middleware\AccessLogMiddleware;
+use Alienpruts\SupportRandomiser\Middleware\CsrfViewMiddleWare;
 use Alienpruts\SupportRandomiser\Middleware\OldInputMiddleware;
 use Alienpruts\SupportRandomiser\Middleware\ValidationErrorsMiddleware;
 use Alienpruts\SupportRandomiser\Validation\Validator;
 use Illuminate\Database\Capsule\Manager;
 use Respect\Validation\Validator as v;
+use Slim\Csrf\Guard;
 use Slim\Flash\Messages;
 
 session_start();
@@ -59,11 +61,19 @@ $container['flash'] = function () {
     return new Messages();
 };
 
+$container['csrf'] = function () {
+    return new Guard();
+};
+
 $app->add(new AccessLogMiddleware($container));
 
 $app->add(new OldInputMiddleware($container));
 
 $app->add(new ValidationErrorsMiddleware($container));
+
+$app->add(new CsrfViewMiddleWare($container));
+$app->add($container['csrf']);
+
 
 v::with('Alienpruts\\SupportRandomiser\\Validation\\Rules');
 
