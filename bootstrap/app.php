@@ -17,6 +17,7 @@ use Alienpruts\SupportRandomiser\Middleware\ValidationErrorsMiddleware;
 use Alienpruts\SupportRandomiser\Validation\Validator;
 use Illuminate\Database\Capsule\Manager;
 use Respect\Validation\Validator as v;
+use Slim\Flash\Messages;
 
 session_start();
 date_default_timezone_set('Europe/Brussels');
@@ -52,6 +53,10 @@ $container['AuthController'] = function ($container) {
 
 $container['validator'] = function () {
     return new Validator();
+};
+
+$container['flash'] = function () {
+    return new Messages();
 };
 
 $app->add(new AccessLogMiddleware($container));

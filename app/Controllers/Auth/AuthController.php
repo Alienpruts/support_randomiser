@@ -11,6 +11,7 @@ namespace Alienpruts\SupportRandomiser\Controllers\Auth;
 use Alienpruts\SupportRandomiser\Auth\Auth;
 use Alienpruts\SupportRandomiser\Controllers\BaseController;
 use Alienpruts\SupportRandomiser\Validation\Validator;
+use Slim\Flash\Messages;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Router;
@@ -22,6 +23,7 @@ use Respect\Validation\Validator as v;
  * @property Auth auth
  * @property Router router
  * @property Validator validator
+ * @property Messages flash
  */
 class AuthController extends BaseController
 {
@@ -40,7 +42,8 @@ class AuthController extends BaseController
 
         // If authentication retrieval failed, redirect to signin page.
         if (!$authenticated) {
-            // TODO : set message of some sort?
+            $this->flash->addMessage('error',
+              'Could not sign in with provided credentials. Please try again!');
             return $res->withRedirect($this->router->pathFor('auth.signin'));
         }
 
@@ -51,7 +54,7 @@ class AuthController extends BaseController
     {
         $this->auth->signout();
 
-        // TODO : set message to notify of logout.
+        $this->flash->addMessage('info', 'Successfully logged out');
         return $res->withRedirect($this->router->pathFor('home'));
     }
 
@@ -82,7 +85,8 @@ class AuthController extends BaseController
         ]);
 
         if ($validation->failed()) {
-            // TODO : flash messages
+            $this->flash->addMessage('error',
+              'There was an error processing this form. Please correct all fields in red.');
             return $res->withRedirect($this->router->pathFor('auth.edit'));
         }
 
@@ -91,8 +95,8 @@ class AuthController extends BaseController
           ->setPassword($req->getParam('password'));
         $updated_email = $this->auth->user()->setEmail($req->getParam('email'));
 
-        // TODO Flash message to indicate succes or failure.
 
+        $this->flash->addMessage('info', 'Account successfully updated');
         return $res->withRedirect($this->router->pathFor('home'));
     }
 
