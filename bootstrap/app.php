@@ -16,6 +16,7 @@ use Alienpruts\SupportRandomiser\Middleware\OldInputMiddleware;
 use Alienpruts\SupportRandomiser\Middleware\ValidationErrorsMiddleware;
 use Alienpruts\SupportRandomiser\Validation\Validator;
 use Illuminate\Database\Capsule\Manager;
+use Respect\Validation\Validator as v;
 
 session_start();
 date_default_timezone_set('Europe/Brussels');
@@ -58,5 +59,7 @@ $app->add(new AccessLogMiddleware($container));
 $app->add(new OldInputMiddleware($container));
 
 $app->add(new ValidationErrorsMiddleware($container));
+
+v::with('Alienpruts\\SupportRandomiser\\Validation\\Rules');
 
 require_once __DIR__ . '/../app/routes.php';

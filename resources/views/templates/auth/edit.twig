@@ -8,6 +8,7 @@
                 <div class="panel-heading">Account settings</div>
                 <div class="panel-body">
                     <form action="{{ path_for('auth.edit') }}" method="post" autocomplete="off">
+                        {{ dump(errors) }}
                         <div class="form-group ">
                             <label for="name">Name</label>
                             <input type="text" name="name" id="name" value="{{ auth.user.naam }}"
@@ -23,12 +24,14 @@
                             </span>
                             {% endif %}
                         </div>
-                        <div class="form-group ">
-                            <label for="old-password">Current password</label>
-                            <input type="password" name="old-password" id="old-password" class="form-control">
-                            <span class="help-block">
-                                    TODO : help text with validation
+                        <div class="form-group {{ errors.old_password ? 'has-error' : '' }} ">
+                            <label for="old_password">Current password</label>
+                            <input type="password" name="old_password" id="old_password" class="form-control">
+                            {% if errors.old_password %}
+                                <span class="help-block">
+                                {{ errors.old_password | first }}
                             </span>
+                            {% endif %}
                         </div>
                         <div class="form-group {{ errors.password ? 'has-error' : '' }}">
                             <label for="password">New Password</label>

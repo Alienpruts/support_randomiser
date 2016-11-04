@@ -70,10 +70,15 @@ class AuthController extends BaseController
     public function postEdit(Request $req, Response $res)
     {
 
-        // TODO : check if current password is correct (custom rule).
         $validation = $this->validator->validate($req, [
           'email' => v::noWhitespace()->notEmpty()->email(),
-          'password' => v::noWhitespace()->notEmpty()->length(8),
+          'old_password' => v::noWhitespace()
+            ->notEmpty()
+            ->matchesPassword($this->auth->user()),
+          'password' => v::noWhitespace()
+            ->notEmpty()
+            ->length(8)
+            ->identicalPassword($req->getParam('old_password')),
         ]);
 
         if ($validation->failed()) {
