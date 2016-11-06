@@ -20,21 +20,24 @@ class HomeController extends BaseController
 {
     public function index(Request $req, Response $res)
     {
-        // TODO : current week is Calendar week, not own Week!
+        // TODO : This controller is very similar to WeekController, but does not
+        // have some advanced features like correct next, previous links.
+        // REWORK, or replace by 'simple' week view?
         $date = date(' D d M Y');
         $week_nr = date('W', time());
         $year = date('Y', time());
         $calendar = new Calendar();
         $week = $calendar->getWeek($year, $week_nr);
-        $weeknrs = [
+        $iterations = [
           'previous' => $week->getPrevious()->__toString(),
           'next' => $week->getNext()->__toString(),
+          'year' => $year,
         ];
 
         return $this->view->render($res, 'home.twig', [
           'week' => $week,
           'date' => $date,
-          'weeknrs' => $weeknrs,
+          'iterations' => $iterations,
         ]);
     }
 }

@@ -1,8 +1,8 @@
 <div> Current date : {{ date }}</div>
 <div> Current week number : {{ week.__toString() }}</div>
 
-<a href="{{ path_for('week.getweek', {'weeknr' : weeknrs.previous}) }}">previous</a>
-<a href="{{ path_for('week.getweek', {'weeknr' : weeknrs.next}) }}">next</a>
+<a href="{{ path_for('week.getweek', {'year' : iterations.previous.year, 'weeknr' : iterations.previous.week}) }}">previous</a>
+<a href="{{ path_for('week.getweek', {'year' : iterations.next.year, 'weeknr' : iterations.next.week}) }}">next</a>
 <div class="row">
     {% for day in week %}
         {% if loop.index < 6 %}

@@ -17,4 +17,5 @@ $app->get('/auth/edit', 'AuthController:getEdit')->setName('auth.edit');
 $app->post('/auth/edit', 'AuthController:postEdit');
 
 // TODO : check for integer value for weeknr arg.
-$app->get('/week/{weeknr}', 'WeekController:getWeek')->setName('week.getweek');
+// TODO : make the route account (and responsible for) the year it has to show?
+$app->get('/{year:[0-9]+}/week/{weeknr:[0-9]+}', 'WeekController:getWeek')->setName('week.getweek');
