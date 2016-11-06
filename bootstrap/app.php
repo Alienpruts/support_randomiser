@@ -11,6 +11,7 @@ use Alienpruts\SupportRandomiser\Auth\Auth;
 use Alienpruts\SupportRandomiser\Configurator\Configurator;
 use Alienpruts\SupportRandomiser\Controllers\Auth\AuthController;
 use Alienpruts\SupportRandomiser\Controllers\HomeController;
+use Alienpruts\SupportRandomiser\Controllers\WeekController;
 use Alienpruts\SupportRandomiser\Middleware\AccessLogMiddleware;
 use Alienpruts\SupportRandomiser\Middleware\CsrfViewMiddleWare;
 use Alienpruts\SupportRandomiser\Middleware\OldInputMiddleware;
@@ -65,6 +66,9 @@ $container['csrf'] = function () {
     return new Guard();
 };
 
+$container['WeekController'] = function ($container) {
+    return new WeekController($container);
+};
 $app->add(new AccessLogMiddleware($container));
 
 $app->add(new OldInputMiddleware($container));

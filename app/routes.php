@@ -15,3 +15,6 @@ $app->get('/auth/signout', 'AuthController:getSignOut')->setName('auth.signout')
 
 $app->get('/auth/edit', 'AuthController:getEdit')->setName('auth.edit');
 $app->post('/auth/edit', 'AuthController:postEdit');
+
+// TODO : check for integer value for weeknr arg.
+$app->get('/week/{weeknr}', 'WeekController:getWeek')->setName('week.getweek');

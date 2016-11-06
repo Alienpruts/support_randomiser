@@ -2,27 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: bert
- * Date: 10/27/16
- * Time: 9:17 PM
+ * Date: 11/6/16
+ * Time: 4:49 PM
  */
 
 namespace Alienpruts\SupportRandomiser\Controllers;
 
+
 use CalendR\Calendar;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Views\Twig;
 
-/**
- * @property Twig view
- */
-class HomeController extends BaseController
+class WeekController extends BaseController
 {
-    public function index(Request $req, Response $res)
+    public function getWeek(Request $req, Response $res, $args)
     {
-        // TODO : current week is Calendar week, not own Week!
+        // TODO : Currenty week is a Calendar week, not own Week model!
+        // TODO : create seperate twig partial for this?
+        // TODO : when changing years (week 52), year is not changed (ie. back to week 1 of current year)
         $date = date(' D d M Y');
-        $week_nr = date('W', time());
+        $week_nr = $args['weeknr'];
         $year = date('Y', time());
         $calendar = new Calendar();
         $week = $calendar->getWeek($year, $week_nr);
