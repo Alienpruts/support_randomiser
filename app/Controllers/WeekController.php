@@ -9,7 +9,6 @@
 namespace Alienpruts\SupportRandomiser\Controllers;
 
 
-use CalendR\Calendar;
 use CalendR\Exception;
 use CalendR\Period\PeriodInterface;
 use Slim\Http\Request;
@@ -20,11 +19,10 @@ class WeekController extends BaseController
     public function getWeek(Request $req, Response $res, $args)
     {
         // TODO : Currenty week is a Calendar week, not own Week model!
-        // TODO : when changing years (week 52), year is not changed (ie. back to week 1 of current year)
         $date = date(' D d M Y');
         $week_nr = $args['weeknr'];
         $year = isset($args['year']) ? $args['year'] : date('Y', time());
-        $calendar = new Calendar();
+        $calendar = $this->calendar;
         // TODO : let Router handle exceptions (now Slim handles it)
         try {
             $week = $calendar->getWeek($year, $week_nr);

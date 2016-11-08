@@ -46,6 +46,10 @@ $container['auth'] = function ($container) {
     return new Auth();
 };
 
+$container['calendar'] = function () {
+    return new CalendR\Calendar();
+};
+
 $container['HomeController'] = function ($container) {
     return new HomeController($container);
 };

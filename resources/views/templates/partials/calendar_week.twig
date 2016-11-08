@@ -1,8 +1,11 @@
 <div> Current date : {{ date }}</div>
-<div> Current week number : {{ week.__toString() }}</div>
+<div> Current week number : {{ week.__toString() }} | {{ week.format('Y') }}</div>
 
-<a href="{{ path_for('week.getweek', {'year' : iterations.previous.year, 'weeknr' : iterations.previous.week}) }}">previous</a>
-<a href="{{ path_for('week.getweek', {'year' : iterations.next.year, 'weeknr' : iterations.next.week}) }}">next</a>
+{% if iterations %}
+    <a href="{{ path_for('week.getweek', {'year' : iterations.previous.year, 'weeknr' : iterations.previous.week}) }}">previous</a>
+    <a href="{{ path_for('week.getweek', {'year' : iterations.next.year, 'weeknr' : iterations.next.week}) }}">next</a>
+{% endif %}
+
 <div class="row">
     {% for day in week %}
         {% if loop.index < 6 %}
@@ -12,5 +15,8 @@
             </div>
         {% endif %}
     {% endfor %}
+    <div class="col-sm-2">
+        <span><a href="{{ path_for('week.getweek', {'year' : week.format('Y'), 'weeknr' : week.__toString()}) }}">WEEKCONTROLLER</a></span>
+    </div>
 
 </div>
