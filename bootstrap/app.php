@@ -9,6 +9,7 @@
 
 use Alienpruts\SupportRandomiser\Auth\Auth;
 use Alienpruts\SupportRandomiser\Configurator\Configurator;
+use Alienpruts\SupportRandomiser\Controllers\Admin\AdminController;
 use Alienpruts\SupportRandomiser\Controllers\Auth\AuthController;
 use Alienpruts\SupportRandomiser\Controllers\HomeController;
 use Alienpruts\SupportRandomiser\Controllers\WeekController;
@@ -17,6 +18,7 @@ use Alienpruts\SupportRandomiser\Middleware\CsrfViewMiddleWare;
 use Alienpruts\SupportRandomiser\Middleware\OldInputMiddleware;
 use Alienpruts\SupportRandomiser\Middleware\ValidationErrorsMiddleware;
 use Alienpruts\SupportRandomiser\Validation\Validator;
+use Alienpruts\SupportRandomiser\Admin\Admin;
 use Illuminate\Database\Capsule\Manager;
 use Respect\Validation\Validator as v;
 use Slim\Csrf\Guard;
@@ -46,6 +48,10 @@ $container['auth'] = function ($container) {
     return new Auth();
 };
 
+$container['admin'] = function () {
+    return new Admin();
+};
+
 $container['calendar'] = function () {
     return new CalendR\Calendar();
 };
@@ -73,6 +79,11 @@ $container['csrf'] = function () {
 $container['WeekController'] = function ($container) {
     return new WeekController($container);
 };
+
+$container['AdminController'] = function ($container) {
+    return new AdminController($container);
+};
+
 $app->add(new AccessLogMiddleware($container));
 
 $app->add(new OldInputMiddleware($container));

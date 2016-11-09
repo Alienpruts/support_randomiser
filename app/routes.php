@@ -16,6 +16,7 @@ $app->get('/auth/signout', 'AuthController:getSignOut')->setName('auth.signout')
 $app->get('/auth/edit', 'AuthController:getEdit')->setName('auth.edit');
 $app->post('/auth/edit', 'AuthController:postEdit');
 
-// TODO : check for integer value for weeknr arg.
-// TODO : make the route account (and responsible for) the year it has to show?
 $app->get('/{year:[0-9]+}/week/{weeknr:[0-9]+}', 'WeekController:getWeek')->setName('week.getweek');
+
+$app->get('/admin/user/create', 'AdminController:getUserCreate')->setName('admin.usercreate');
+$app->post('/admin/user/create', 'AdminController:postUserCreate');

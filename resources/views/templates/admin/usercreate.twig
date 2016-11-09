@@ -1,0 +1,33 @@
+{% extends'templates/base.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Create new user</div>
+                <div class="panel-body">
+                    <form action="{{ path_for('admin.usercreate') }}" method="post" autocomplete="off">
+                        <div class="form-group ">
+                            <label for="name">Name</label>
+                            <input type="name" name="name" id="name"
+                                   value="{{ old.name }}" class="form-control">
+                        </div>
+                        <div class="form-group ">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="you@domain.com"
+                                   value="{{ old.email }}" class="form-control">
+                        </div>
+                        <div class="form-group form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-default"> Create user</button>
+                        {{ csrf.field | raw }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
