@@ -6,10 +6,11 @@
  * Time: 11:38 PM
  */
 
+//TODO : rework access checking, because now we have to check the var for every method.
+
 namespace Alienpruts\SupportRandomiser\Admin;
 
 use Alienpruts\SupportRandomiser\Models\User;
-use Slim\Exception\SlimException;
 
 class Admin
 {
@@ -51,6 +52,29 @@ class Admin
 
         return true;
 
+    }
+
+    public function hasAccess()
+    {
+        return $this->access;
+
+    }
+
+    public function createUser(array $data)
+    {
+        if ($this->access) {
+
+            $user = new User();
+            $user->naam = $data['name'];
+            $user->email = $data['email'];
+            $user->paswoord = password_hash($data['paswoord'],
+              PASSWORD_DEFAULT);
+            $user->score = 0;
+
+            return $user->save();
+        }
+
+        return false;
     }
 
 }

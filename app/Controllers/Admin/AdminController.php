@@ -57,9 +57,22 @@ class AdminController extends BaseController
             return $res->withRedirect($this->router->pathFor('admin.usercreate'));
         }
 
-        //TODO : create user using admin instance
+        // TODO : Data has already been validated, sanitation needed with ORM?
+        if (!$admin->hasAccess()) {
+            $this->flash->addMessage('error',
+              'Sorry, the current logged in user does not have the permission to create a new user.');
+            return $res->withRedirect($this->router->pathFor('admin.usercreate'));
+        }
 
-        $this->flash->addMessage('info', 'New user %%name%% created');
-        return $res->withRedirect($this->router->pathFor('admin.usercreate'));
+        if (!$admin->createUser($req->getParams())) {
+            $this->flash->addMessage('error',
+              'Could not create new user //TODO Exception error message//.');
+            return $res->withRedirect($this->router->pathFor('admin.usercreate'));
+        }
+
+        $this->flash->addMessage('info',
+          'New user ' . $req->getParam('name') . 'created');
+        //TODO redirect to admin control page
+        return $res->withRedirect($this->router->pathFor('home'));
     }
 }

@@ -13,7 +13,7 @@ use Respect\Validation\Rules\AbstractRule;
 use Slim\Container;
 
 /**
- * @property Container  container
+ * @property Container container
  */
 class UniqueName extends AbstractRule
 {
@@ -27,6 +27,6 @@ class UniqueName extends AbstractRule
     public function validate($input)
     {
         // check database if input name is unique
-        return $this->admin->checkName($input);
+        return !$this->admin->checkName($input);
     }
 }
