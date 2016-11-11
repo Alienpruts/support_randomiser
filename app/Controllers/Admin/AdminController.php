@@ -12,6 +12,7 @@ namespace Alienpruts\SupportRandomiser\Controllers\Admin;
 use Alienpruts\SupportRandomiser\Admin\Admin;
 use Alienpruts\SupportRandomiser\Auth\Auth;
 use Alienpruts\SupportRandomiser\Controllers\BaseController;
+use Alienpruts\SupportRandomiser\Models\User;
 use Alienpruts\SupportRandomiser\Validation\Validator;
 use Slim\Flash\Messages;
 use Slim\Http\Request;
@@ -40,13 +41,53 @@ class AdminController extends BaseController
     public function getOverview(Request $req, Response $res)
     {
         // Render user overview Twig template.
-        return $this->view->render($res, 'templates/admin/user_overview.twig');
+        // Get all users from system
+        $users = User::all()->all();
+        return $this->view->render($res, 'templates/admin/user_overview.twig', [
+          'users' => $users,
+        ]);
     }
 
     public function getUserCreate(Request $req, Response $res)
     {
         //create user form
         return $this->view->render($res, 'templates/admin/usercreate.twig');
+    }
+
+    public function getUserEdit(Request $req, Response $res, $args)
+    {
+        $user = User::find($args['userid']);
+        return $this->view->render($res, 'templates/admin/useredit.twig', [
+          'user' => $user,
+        ]);
+    }
+
+    public function postUserEdit(Request $req, Response $res, $args) {
+        //validate input
+        //edit user
+        $user = User::find($args['userid']);
+        $admin = new Admin($this->auth->user());
+
+        // Validate input.
+        $validation = $this->validator->validate($req, [
+          'name' => v::notEmpty()->uniqueName($admin, $user->id),
+          'email' => v::noWhitespace()->email()->notEmpty(),
+          'new_password' => v::noWhitespace()
+            ->notEmpty()
+            ->length(8),
+          'confirm_password' => v::noWhitespace()
+            ->notEmpty()
+            ->length(8)
+            //TODO : equals return new_password as string in Exception !!!
+            ->equals($req->getParam('new_password')),
+        ]);
+
+        if ($validation->failed()) {
+            $this->flash->addMessage('error',
+              'There was an error processing this form. Please correct all fields in red.');
+            return $res->withRedirect($this->router->pathFor('admin.useredit', ['userid' => $user->id ]));
+        }
+
     }
 
     public function postUserCreate(Request $req, Response $res)

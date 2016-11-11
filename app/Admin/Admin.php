@@ -36,7 +36,7 @@ class Admin
             return false;
         }
 
-        return true;
+        return $user;
     }
 
     /**

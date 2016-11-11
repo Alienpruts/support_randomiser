@@ -25,3 +25,6 @@ $app->get('/admin/user/overview', 'AdminController:getOverview')->setName('admin
 
 $app->get('/admin/user/create', 'AdminController:getUserCreate')->setName('admin.usercreate');
 $app->post('/admin/user/create', 'AdminController:postUserCreate');
+
+$app->get('/admin/user/{userid:[0-9]+}/edit', 'AdminController:getUserEdit')->setName('admin.useredit');
+$app->post('/admin/user/{userid:[0-9]+}/edit', 'AdminController:postUserEdit');

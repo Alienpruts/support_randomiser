@@ -18,15 +18,22 @@ use Slim\Container;
 class UniqueName extends AbstractRule
 {
     private $admin;
+    private $uid;
 
-    public function __construct($admin)
+    public function __construct($admin, $uid = NULL)
     {
         $this->admin = $admin;
+        $this->uid = $uid;
     }
 
     public function validate($input)
     {
-        // check database if input name is unique
-        return !$this->admin->checkName($input);
+        $user = $this->admin->checkName($input);
+
+        if ($this->uid || $user) {
+            return $this->uid == $user->id ;
+        }
+
+        return !isset($user);
     }
 }
