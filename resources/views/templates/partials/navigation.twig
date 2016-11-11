@@ -20,6 +20,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{ auth.user.naam | capitalize }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <!-- TODO : we should show admin only if current user is allowed to view admin link -->
+                            <li><a href="{{ path_for('admin.home') }}">Admin overview</a></li>
                             <li><a href="{{ path_for('auth.edit') }}">Account settings</a></li>
                             <li><a href="{{ path_for('auth.signout') }}">Sign out</a></li>
                         </ul>

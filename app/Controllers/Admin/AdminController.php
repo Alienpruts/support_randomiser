@@ -31,6 +31,18 @@ use Respect\Validation\Validator as v;
 class AdminController extends BaseController
 {
 
+    public function index(Request $req, Response $res)
+    {
+        // Render admin specific Twig template.
+        return $this->view->render($res, 'templates/admin/index.twig');
+    }
+
+    public function getOverview(Request $req, Response $res)
+    {
+        // Render user overview Twig template.
+        return $this->view->render($res, 'templates/admin/user_overview.twig');
+    }
+
     public function getUserCreate(Request $req, Response $res)
     {
         //create user form

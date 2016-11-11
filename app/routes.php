@@ -18,5 +18,10 @@ $app->post('/auth/edit', 'AuthController:postEdit');
 
 $app->get('/{year:[0-9]+}/week/{weeknr:[0-9]+}', 'WeekController:getWeek')->setName('week.getweek');
 
+//TODO : access check, for admin users only.
+$app->get('/admin', 'AdminController:index')->setName('admin.home');
+
+$app->get('/admin/user/overview', 'AdminController:getOverview')->setName('admin.useroverview');
+
 $app->get('/admin/user/create', 'AdminController:getUserCreate')->setName('admin.usercreate');
 $app->post('/admin/user/create', 'AdminController:postUserCreate');
