@@ -40,12 +40,6 @@ class AdminController extends BaseController
 
     public function getOverview(Request $req, Response $res)
     {
-        // Check if current user has permission to create Users.
-        if (!$this->admin->hasAccess()) {
-            $this->flash->addMessage('error',
-              'Sorry, you do not have permission to view users.');
-            return $res->withRedirect($this->router->pathFor('admin.home'));
-        }
         $users = User::all()->all();
         return $this->view->render($res, 'templates/admin/user_overview.twig', [
           'users' => $users,
@@ -54,27 +48,12 @@ class AdminController extends BaseController
 
     public function getUserCreate(Request $req, Response $res)
     {
-        // Check if current user has permission to create Users.
-        if (!$this->admin->hasAccess()) {
-            $this->flash->addMessage('error',
-              'Sorry, you do not have permission to create users.');
-            return $res->withRedirect($this->router->pathFor('admin.useroverview'));
-        }
-
         //create user form
         return $this->view->render($res, 'templates/admin/usercreate.twig');
     }
 
     public function getUserEdit(Request $req, Response $res, $args)
     {
-
-        // Does current user have permission to do an update of User?
-        if (!$this->admin->hasAccess()) {
-            $this->flash->addMessage('error',
-              'Sorry, you do not have permission to update users.');
-            return $res->withRedirect($this->router->pathFor('admin.useroverview'));
-        }
-
         $user = User::find($args['userid']);
         return $this->view->render($res, 'templates/admin/useredit.twig', [
           'user' => $user,
@@ -155,11 +134,6 @@ class AdminController extends BaseController
 
     public function getUserDelete(Request $req, Response $res, $args)
     {
-        if (!$this->admin->hasAccess()) {
-            $this->flash->addMessage('error',
-              'Sorry, you do not have permission to delete users.');
-            return $res->withRedirect($this->router->pathFor('admin.useroverview'));
-        }
         $user = User::find($args['userid']);
         return $this->view->render($res, 'templates/admin/userdelete.twig', [
           'user' => $user

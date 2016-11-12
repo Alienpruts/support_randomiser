@@ -14,6 +14,9 @@ $app->get('/', 'HomeController:index')->setName('home');
 $app->get('/auth/signin', 'AuthController:getSignin')->setName('auth.signin');
 $app->post('/auth/signin', 'AuthController:postSignin');
 
+$app->get('/{year:[0-9]+}/week/{weeknr:[0-9]+}', 'WeekController:getWeek')
+  ->setName('week.getweek');
+
 $app->group('', function () use ($app) {
     $this->get('/auth/signout', 'AuthController:getSignOut')
       ->setName('auth.signout');
@@ -23,11 +26,6 @@ $app->group('', function () use ($app) {
 })->add(new AuthMiddleware($container));
 
 
-
-$app->get('/{year:[0-9]+}/week/{weeknr:[0-9]+}', 'WeekController:getWeek')
-  ->setName('week.getweek');
-
-//TODO : access check, for admin users only, do this on all /admin/* paths.
 $app->group('', function () use ($app) {
     $this->get('/admin/', 'AdminController:index')->setName('admin.home');
 
