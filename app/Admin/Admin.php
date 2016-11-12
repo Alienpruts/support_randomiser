@@ -18,7 +18,7 @@ class Admin
 
     public function __construct($user = null)
     {
-        $this->access = $this->checkAccess($user);
+        $this->access = $this->setAccess($user);
     }
 
     // Check if user name is already taken.
@@ -40,14 +40,14 @@ class Admin
     }
 
     /**
-     * Check if given user has Admin access.
+     * Sets admin acces depening on user.
      *
      * @param User|null $user
      *  Given User object or NUll
      * @return bool
      *  Returns TRUE if user should have access, FALSE otherwise.
      */
-    private function checkAccess($user)
+    private function setAccess($user)
     {
         // TODO : dummy check, rework check!
         if (!isset($user->naam)) {
