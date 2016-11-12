@@ -48,8 +48,8 @@ $container['auth'] = function ($container) {
     return new Auth();
 };
 
-$container['admin'] = function () {
-    return new Admin();
+$container['admin'] = function ($container) {
+    return new Admin($container->auth->user());
 };
 
 $container['calendar'] = function () {

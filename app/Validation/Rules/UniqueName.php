@@ -30,10 +30,10 @@ class UniqueName extends AbstractRule
     {
         $user = $this->admin->checkName($input);
 
-        if ($this->uid || $user) {
+        if ($this->uid && $user) {
             return $this->uid == $user->id ;
         }
 
-        return !isset($user);
+        return !$user;
     }
 }
