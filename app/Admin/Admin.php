@@ -40,7 +40,7 @@ class Admin
     }
 
     /**
-     * Sets admin acces depening on user.
+     * Sets admin access depending on user.
      *
      * @param User|null $user
      *  Given User object or NUll
@@ -89,6 +89,7 @@ class Admin
             $user->email = $data['email'];
             $user->paswoord = password_hash($data['paswoord'],
               PASSWORD_DEFAULT);
+            $user->role = $data['role'];
             $user->score = 0;
 
             return $user->save();
@@ -115,7 +116,9 @@ class Admin
         $user = User::find($userid);
 
         // If a user is found.
-        if ($user && ($user->setEmail($data['email']) && $user->setNaam($data['name']))) {
+        if ($user && ($user->setEmail($data['email']) &&
+            $user->setNaam($data['name']) &&
+            $user->setRole($data['role']))) {
             $result = true;
         }
 

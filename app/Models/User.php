@@ -18,7 +18,8 @@ class User extends Model
       'naam',
       'email',
       'paswoord',
-      'score'
+      'score',
+      'role',
     ];
 
     /**
@@ -49,7 +50,7 @@ class User extends Model
      * @param string $email
      *  The email to set on the model.
      * @return bool
-     *  Returns TRUE if update of the field succeeded, FALSE if $email is empty OR update failed.
+     *  Returns TRUE if update of the field succeeded, FALSE otherwise.
      */
     public function setEmail($email)
     {
@@ -65,7 +66,7 @@ class User extends Model
      * @param string $naam
      *  The naam to set on the model.
      * @return bool
-     *  Returns TRUE if update of the field succeeded, FALSE if $email is empty OR update failed.
+     *  Returns TRUE if update of the field succeeded, FALSE otherwise.
      */
     public function setNaam($naam)
     {
@@ -75,4 +76,18 @@ class User extends Model
         ]);
     }
 
+    /**
+     * Sets role on the User model.
+     *
+     * @param string $role
+     *  The rol to set on the model.
+     * @return bool
+     *  Returns TRUE if update of the field succeeded, FALSE otherwise.
+     */
+    public function setRole($role){
+
+        return $this->update([
+          'role' => $role,
+        ]);
+    }
 }

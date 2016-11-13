@@ -37,6 +37,13 @@
                             </span>
                             {% endif %}
                         </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select id="role" name="role" class="selectpicker">
+                                <option>User</option>
+                                <option>Admin</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-default"> Create user</button>
                         {{ csrf.field | raw }}
                     </form>

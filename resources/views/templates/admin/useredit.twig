@@ -8,10 +8,18 @@
                 <div class="panel-heading">Edit user <strong>{{ user.naam }}</strong></div>
                 <div class="panel-body">
                     <form action="{{ path_for('admin.useredit', {'userid' : user.id}) }}" method="post" autocomplete="off">
+                        {{ dump(user.role) }}
                         <div class="form-group ">
                             <label for="uid">User ID</label>
                             <input type="text" name="uid" id="uid" value="{{ user.id }}" disabled
                                    class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select id="role" name="role" class="selectpicker">
+                                <option {{ user.role == 'User' ? 'selected' : '' }}>User</option>
+                                <option {{ user.role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            </select>
                         </div>
                         <div class="form-group {{ errors.name ? 'has-error' : '' }} ">
                             <label for="name">Name</label>
