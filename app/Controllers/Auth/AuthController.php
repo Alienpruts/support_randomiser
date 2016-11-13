@@ -29,6 +29,10 @@ class AuthController extends BaseController
 {
     public function getSignin(Request $req, Response $res)
     {
+        if ($this->auth->check()) {
+            $this->flash->addMessage('info', 'You are already signed in. Redirecting to profile edit page.');
+            return $res->withRedirect($this->router->pathFor('auth.edit'));
+        }
         return $this->view->render($res, 'templates/auth/signin.twig');
     }
 
