@@ -78,7 +78,7 @@ class AuthController extends BaseController
     {
 
         $validation = $this->validator->validate($req, [
-          'email' => v::noWhitespace()->notEmpty()->email(),
+          'email' => v::noWhitespace()->notEmpty()->email()->uniqueEmail(),
           'old_password' => v::noWhitespace()
             ->notEmpty()
             ->matchesPassword($this->auth->user()),

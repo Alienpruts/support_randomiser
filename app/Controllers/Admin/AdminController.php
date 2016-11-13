@@ -66,7 +66,7 @@ class AdminController extends BaseController
         // Validate input.
         $validation = $this->validator->validate($req, [
           'name' => v::notEmpty()->uniqueName($this->admin, $args['userid']),
-          'email' => v::noWhitespace()->email()->notEmpty(),
+          'email' => v::noWhitespace()->email()->notEmpty()->uniqueEmail(),
         ]);
 
         // We need to allow empty password fields on a edit, the user might not
@@ -95,7 +95,7 @@ class AdminController extends BaseController
         }
 
         $this->flash->addMessage('info',
-          'User ' . $req->getParam('name') . 'has been updated');
+          'User ' . $req->getParam('name') . ' has been updated');
         return $res->withRedirect($this->router->pathFor('admin.useroverview'));
 
     }
@@ -106,7 +106,7 @@ class AdminController extends BaseController
         // Validate input.
         $validation = $this->validator->validate($req, [
           'name' => v::notEmpty()->uniqueName($this->admin),
-          'email' => v::noWhitespace()->email()->notEmpty(),
+          'email' => v::noWhitespace()->email()->notEmpty()->uniqueEmail(),
           'password' => v::noWhitespace()
             ->notEmpty()
             ->length(8),
