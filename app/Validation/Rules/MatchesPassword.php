@@ -22,6 +22,12 @@ class MatchesPassword extends AbstractRule
 
     public function validate($input)
     {
+        // If empty input : validate anyway. There is no way the current password
+        // can be empty, so skip verifying empty passwords.
+        if (!$input) {
+            return true;
+        }
+
         // Check if current password is valid.
         return password_verify($input, $this->user->paswoord);
     }

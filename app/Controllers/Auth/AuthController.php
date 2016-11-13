@@ -76,6 +76,10 @@ class AuthController extends BaseController
 
     public function postEdit(Request $req, Response $res)
     {
+        // TODO : Rework validation rules here : if password fields are
+        // empty, assume email has changed and validate email and NOT password fields. If password fields
+        // are filled in, assume user wants to change passwords and validate them and NOT email.
+        // What if both email and password are filled in?
 
         $validation = $this->validator->validate($req, [
           'email' => v::noWhitespace()->notEmpty()->email()->uniqueEmail(),
@@ -88,17 +92,18 @@ class AuthController extends BaseController
             ->identicalPassword($req->getParam('old_password')),
         ]);
 
+
         if ($validation->failed()) {
             $this->flash->addMessage('error',
               'There was an error processing this form. Please correct all fields in red.');
             return $res->withRedirect($this->router->pathFor('auth.edit'));
         }
 
-        // TODO : check if updates failed or not.
-        $updated_password = $this->auth->user()
-          ->setPassword($req->getParam('password'));
-        $updated_email = $this->auth->user()->setEmail($req->getParam('email'));
-
+        if (!$this->auth->updateUser($req->getParams())) {
+            $this->flash->addMessage('error',
+              'There was an error trying to update your account //TODO Exception error message//.');
+            return $res->withRedirect($this->router->pathFor('auth.edit'));
+        }
 
         $this->flash->addMessage('info', 'Account successfully updated');
         return $res->withRedirect($this->router->pathFor('home'));
