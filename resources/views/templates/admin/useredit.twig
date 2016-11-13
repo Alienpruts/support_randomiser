@@ -8,7 +8,6 @@
                 <div class="panel-heading">Edit user <strong>{{ user.naam }}</strong></div>
                 <div class="panel-body">
                     <form action="{{ path_for('admin.useredit', {'userid' : user.id}) }}" method="post" autocomplete="off">
-                        {{ dump(user.role) }}
                         <div class="form-group ">
                             <label for="uid">User ID</label>
                             <input type="text" name="uid" id="uid" value="{{ user.id }}" disabled
@@ -21,39 +20,43 @@
                                 <option {{ user.role == 'Admin' ? 'selected' : '' }}>Admin</option>
                             </select>
                         </div>
-                        <div class="form-group {{ errors.name ? 'has-error' : '' }} ">
+                        <div class="form-group required {{ errors.name ? 'has-error has-feedback' : '' }} ">
                             <label for="name">Name</label>
                             <input type="text" name="name" id="name" value="{{ user.naam }}"
                                    class="form-control">
                             {% if errors.name %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 <span class="help-block">
                                 {{ errors.name | first }}
                             </span>
                             {% endif %}
                         </div>
-                        <div class="form-group {{ errors.email ? 'has-error' : '' }}">
+                        <div class="form-group required {{ errors.email ? 'has-error has-feedback' : '' }}">
                             <label for="email">Email</label>
                             <input type="email" name="email" id="email" value="{{ user.email }}"
                                    class="form-control">
                             {% if errors.email %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 <span class="help-block">
                                 {{ errors.email | first }}
                             </span>
                             {% endif %}
                         </div>
-                        <div class="form-group {{ errors.new_password ? 'has-error' : '' }} ">
+                        <div class="form-group {{ errors.new_password ? 'has-error has-feedback' : '' }} ">
                             <label for="new_password">New password</label>
                             <input type="password" name="new_password" id="new_password" class="form-control">
                             {% if errors.new_password %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 <span class="help-block">
                                 {{ errors.new_password | first }}
                             </span>
                             {% endif %}
                         </div>
-                        <div class="form-group {{ errors.confirm_password ? 'has-error' : '' }} ">
+                        <div class="form-group {{ errors.confirm_password ? 'has-error has-feedback' : '' }} ">
                             <label for="confirm_password">Retype password</label>
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                             {% if errors.confirm_password %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 <span class="help-block">
                                 {{ errors.confirm_password | first }}
                             </span>

@@ -8,30 +8,33 @@
                 <div class="panel-heading">Create new user</div>
                 <div class="panel-body">
                     <form action="{{ path_for('admin.usercreate') }}" method="post" autocomplete="off">
-                        <div class="form-group {{ errors.name ? 'has-error' : '' }} ">
+                        <div class="form-group required{{ errors.name ? 'has-error has-feedback' : '' }} ">
                             <label for="name">Name</label>
                             <input type="name" name="name" id="name"
-                                   value="{{ old.name }}" class="form-control">
+                                   value="{{ old.name }}" class="form-control" required>
                             {% if errors.name %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 <span class="help-block">
                                 {{ errors.name | first }}
                             </span>
                             {% endif %}
                         </div>
-                        <div class="form-group {{ errors.email ? 'has-error' : '' }} ">
+                        <div class="form-group required {{ errors.email ? 'has-error has-feedback ' : '' }} ">
                             <label for="email">Email</label>
                             <input type="email" name="email" id="email" placeholder="you@domain.com"
-                                   value="{{ old.email }}" class="form-control">
+                                   value="{{ old.email }}" class="form-control" required>
                             {% if errors.email %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 <span class="help-block">
                                 {{ errors.email | first }}
                             </span>
                             {% endif %}
                         </div>
-                        <div class="form-group {{ errors.password ? 'has-error' : '' }}">
+                        <div class="form-group required {{ errors.password ? 'has-error has-feedback' : '' }}">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control">
+                            <input type="password" name="password" id="password" class="form-control" required>
                             {% if errors.password %}
+                                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 <span class="help-block">
                                 {{ errors.password | first }}
                             </span>

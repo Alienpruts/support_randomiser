@@ -2,3 +2,10 @@ body {
     padding-top: 80px;
     padding-bottom: 40px;
 }
+
+.form-group.required label:after {
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 8px;
+}
