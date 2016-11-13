@@ -6,8 +6,6 @@
  * Time: 11:38 PM
  */
 
-//TODO : rework access checking, because now we have to check the var for every method.
-
 namespace Alienpruts\SupportRandomiser\Admin;
 
 use Alienpruts\SupportRandomiser\Models\User;
@@ -40,27 +38,25 @@ class Admin
     }
 
     /**
-     * Sets admin access depending on user.
+     * Sets admin access depending on user role.
      *
      * @param User|null $user
      *  Given User object or NUll
      * @return bool
-     *  Returns TRUE if user should have access, FALSE otherwise.
+     *  Returns TRUE if user has Admin role, FALSE otherwise.
      */
     private function setAccess($user)
     {
-        // TODO : dummy check, rework check!
-        if (!isset($user->naam)) {
+        if (!$user) {
             return false;
         }
 
-        if (!($user->naam == 'bert')) {
+        if (!($user->role == 'Admin')) {
             return false;
         }
 
         return true;
     }
-
 
     /**
      * Getter for access field.
