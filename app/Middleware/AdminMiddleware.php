@@ -17,7 +17,7 @@ class AdminMiddleware extends BaseMiddleware
     public function __invoke(Request $req, Response $res, $next)
     {
         if (!$this->container->get('auth')->check() && !$this->container->get('admin')->hasAccess()) {
-            $this->container->get('flash')->addMessage('error', 'You need to have admin rights to do that');
+            $this->container->get('flash')->addMessage('error', 'Only Admin users can do that.');
             return $res->withRedirect($this->container->get('router')->pathFor('home'));
         }
 

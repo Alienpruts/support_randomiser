@@ -17,8 +17,8 @@ class AuthMiddleware extends BaseMiddleware
     public function __invoke(Request $req, Response $res, $next)
     {
         if (!$this->container->get('auth')->check()) {
-            $this->container->get('flash')->addMessage('error', 'You need to be logged in to do that');
-            return $res->withRedirect($this->container->get('router')->pathFor('home'));
+            $this->container->get('flash')->addMessage('error', 'You need to be logged in to do that.');
+            return $res->withRedirect($this->container->get('router')->pathFor('auth.signin'));
         }
 
         $res = $next($req, $res);
