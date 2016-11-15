@@ -30,7 +30,8 @@ class AuthController extends BaseController
     public function getSignin(Request $req, Response $res)
     {
         if ($this->auth->check()) {
-            $this->flash->addMessage('info', 'You are already signed in. Redirecting to profile edit page.');
+            $this->flash->addMessage('info',
+              'You are already signed in. Redirecting to profile edit page.');
             return $res->withRedirect($this->router->pathFor('auth.edit'));
         }
         return $this->view->render($res, 'templates/auth/signin.twig');
@@ -76,20 +77,21 @@ class AuthController extends BaseController
 
     public function postEdit(Request $req, Response $res)
     {
-        // TODO : Rework validation rules here : if password fields are
-        // empty, assume email has changed and validate email and NOT password fields. If password fields
-        // are filled in, assume user wants to change passwords and validate them and NOT email.
-        // What if both email and password are filled in?
 
         $validation = $this->validator->validate($req, [
-          'email' => v::noWhitespace()->notEmpty()->email()->uniqueEmail(),
+          'email' => v::noWhitespace()
+            ->notEmpty()
+            ->email()
+            ->when(v::changedEmail($this->auth->user()->email),
+              v::uniqueEmail(), v::alwaysValid()),
           'old_password' => v::noWhitespace()
-            ->notEmpty()
-            ->matchesPassword($this->auth->user()),
+            ->when(v::notEmpty(), v::matchesPassword($this->auth->user()),
+              v::alwaysValid()),
           'password' => v::noWhitespace()
-            ->notEmpty()
-            ->length(8)
-            ->identicalPassword($req->getParam('old_password')),
+            ->when(v::notEmpty(),
+              v::oldPasswordNotEmpty($req->getParam('old_password')),
+              v::alwaysValid())
+            ->when(v::notEmpty(), v::length(8), v::alwaysValid()),
         ]);
 
 
